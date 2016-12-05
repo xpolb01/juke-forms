@@ -4,6 +4,7 @@ const NewPlaylist = function (props) {
 	const handleChange = props.onChange;
 	const onSubmit = props.onSubmit;
 	const value = props.value;
+  const tries = props.tries;
 return (
 <div className="well">
   <form className="form-horizontal" onSubmit={onSubmit}>
@@ -12,14 +13,14 @@ return (
       <div className="form-group">
         <label className="col-xs-2 control-label">Name</label>
         <div className="col-xs-10">
-        	
 
-        	{props.disable 
+
+        	{(props.disable && tries)
         		? (<div className="alert alert-warning">Please enter a valid name</div>)
         		: null}
-        		
-          <input 
-          	className="form-control" 
+
+          <input
+          	className="form-control"
           	type="text"
           	value={value}
           	onChange={handleChange}
@@ -28,16 +29,16 @@ return (
       </div>
       <div className="form-group">
         <div className="col-xs-10 col-xs-offset-2">
-          <button 
-          	type="submit" 
+          <button
+          	type="submit"
           	className="btn btn-success"
-          	disabled={props.disable}
+          	disabled={(props.disable || tries === 0) ? props.disable : false}
           >Create Playlist</button>
         </div>
       </div>
     </fieldset>
   </form>
 </div>
-)} 
+)}
 
 export default NewPlaylist;
